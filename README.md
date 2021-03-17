@@ -1,6 +1,26 @@
+# golang-optimization
+
+**Table of Contents**
+
+- [Prerequisites](#prerequisites)
+- [Build](#build)
+  - [Using Docker](#using-docker)
+- [Run](#run)
+  - [Using Docker](#using-docker)
+- [Run Profile](#run-profile)
+- [Garbage Collection](#garbage-collection)
+
+## Prerequisites
+
+### Dev dependencies
+
+- Go 1.15
+- Git
+- Docker 19.x
+
 ## Build
 
-### Docker
+### Using Docker
 
 ```bash
 docker build -t golang-dev --build-arg GO_VERSION=1.15.8 .
@@ -8,7 +28,7 @@ docker build -t golang-dev --build-arg GO_VERSION=1.15.8 .
 
 ## Run
 
-### Docker
+### Using Docker
 
 Linux and MacOS:
 ```bash

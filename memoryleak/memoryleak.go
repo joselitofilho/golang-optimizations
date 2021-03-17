@@ -4,7 +4,7 @@ import "strings"
 
 var str0 string
 
-func KindofLeakingCausedBySubstring() {
+func CausedBySubstring() {
 	str := allocMemory(1 << 20) // 1MB
 
 	fn(str)
