@@ -26,3 +26,5 @@ func fn(str1 string) {
 	str0 = str1[:50]
 }
 ```
+
+![caused by substrings](caused-by-string.gif)
