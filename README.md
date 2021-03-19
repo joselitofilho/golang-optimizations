@@ -1,5 +1,16 @@
 # golang-optimization
 
+**Table of Contents**
+
+- [Optimizations](#optimizations)
+  - [Memory Leaking](memoryleak/README.md)
+- [Prerequisites](#prerequisites)
+- [Setup](#setup)
+  - [Using Docker](#using-docker)
+- [Run Profile](#run-profile)
+
+## Optimizations
+
 Building systems with high performance, very low response times, supporting the heavy load on little hardware has never been easier. It is necessary to a little bit more about the language, some concepts, and optimize our own code to extract more performance.
 
 I separated some concepts for us to analyze and study together.
@@ -7,13 +18,6 @@ I separated some concepts for us to analyze and study together.
 - ...
 
 Enjoy!
-
-**Table of Contents**
-
-- [Prerequisites](#prerequisites)
-- [Setup](#setup)
-  - [Using Docker](#using-docker)
-- [Run Profile](#run-profile)
 
 ## Prerequisites
 
