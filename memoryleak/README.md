@@ -28,3 +28,33 @@ func fn(str1 string) {
 ```
 
 ![caused by substrings](caused-by-string.gif)
+
+I will show you some ways to avoid this memory leaking.
+
+Te first way is to convert the substring `str1` to a `[]byte` value then convert the `[]byte` value back to `string`.
+```Go
+func fnFix1(str1 string) {
+	str0 = string([]byte(str1[:50]))
+}
+```
+The disadvantage of avoiding memory leaking the above way is that we duplicate the 50 bytes unnecessarily.
+
+
+There is a way to avoid the unnecessary duplicate using the `strings.Builder`.
+```Go
+func fnFix2(str1 string) {
+	var b strings.Builder
+	b.Grow(50)
+	b.WriteString(str1[:50])
+	str0 = b.String()
+}
+```
+The disadvantage of the above way is it is a little verbose.
+
+
+Finally, we can use the `strings.Repeat`. Since the Go 1.12, we can call the [`strings.Repeat`](https://golang.org/pkg/strings/#Repeat) function with the count argument as 1 in the strings standard package to clone a string, and the implementaion of `strings.Repeat` will make use of `strings.Builder`, to avoid one unnecessary duplicate.
+```Go
+func fnFix3(str1 string) {
+	str0 = strings.Repeat(s1[:50], 1)
+}
+```
