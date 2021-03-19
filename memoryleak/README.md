@@ -74,6 +74,6 @@ The disadvantage of the above way is it is a little verbose.
 Finally, we can use the [`strings.Repeat`](https://golang.org/pkg/strings/#Repeat). Since the Go 1.12, we can call the `strings.Repeat` function with the count argument as 1 in the strings standard package to clone a string, and the implementaion of `strings.Repeat` will make use of `strings.Builder`, to avoid one unnecessary duplicate.
 ```Go
 func fnFix3(str1 string) {
-	str0 = strings.Repeat(s1[:50], 1)
+	str0 = strings.Repeat(str1[:50], 1)
 }
 ```
