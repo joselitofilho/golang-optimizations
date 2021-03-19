@@ -32,15 +32,18 @@ func fn(str1 string) {
 I will show you some ways to avoid this memory leaking.
 
 Te first way is to convert the substring `str1` to a `[]byte` value then convert the `[]byte` value back to `string`.
+
 ```Go
 func fnFix1(str1 string) {
 	str0 = string([]byte(str1[:50]))
 }
 ```
+
 The disadvantage of avoiding memory leaking the above way is that we duplicate the 50 bytes unnecessarily.
 
 
 There is a way to avoid the unnecessary duplicate using the `strings.Builder`.
+
 ```Go
 func fnFix2(str1 string) {
 	var b strings.Builder
@@ -49,6 +52,7 @@ func fnFix2(str1 string) {
 	str0 = b.String()
 }
 ```
+
 The disadvantage of the above way is it is a little verbose.
 
 
