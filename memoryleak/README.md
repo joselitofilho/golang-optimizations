@@ -1,10 +1,25 @@
-# Memory Leaking Scenarios
+# Memory Leaking
+
+_Memory leak_ is the name is given when a block of memory, allocated for a given operation, is not released when it is no longer needed. A memory leak can also happen when an object is stoted in memory but can no longer be accessed anymore by the running code.
+
+This [post blog](https://medium.com/dm03514-tech-blog/sre-debugging-simple-memory-leaks-in-go-e0a9e6d63d4d) describes in detail the memory leak.
+
+**Table of Contents**
+
+- [Garbage Collection](#garbage-collection)
+- [Scenarios](#scenarios)
+  - [Caused by Substrings](#caused-by-substrings)
+
+## Garbage Collection
 
 Generally, when programming in a language that supports automatic garbage collection, we do not have to worry about memory leaking problems, as regular cleaning of unused memory will be performed. However, we must keep in mind some special scenarios that can cause a memory leak. Next, we'll look at some scenarios.
 
 To understand about memory management in Go and the garbage collector see [here](https://deepu.tech/memory-management-in-golang/).
 
-## Caused by Substrings
+## Scenarios
+
+### Caused by Substrings
+_see the code [here](causedbysubstring.go)_
 
 The Go standard compiler/runtime allows a `s` string and an `s` substring to share the same underlying memory block. This is very good for saving memory and processing. But it can sometimes cause a memory leak.
 
@@ -27,7 +42,7 @@ func fn(str1 string) {
 }
 ```
 
-![caused by substrings](caused-by-string.gif)
+![caused by substrings](media/caused-by-string.gif)
 
 I will show you some ways to avoid this memory leaking.
 
