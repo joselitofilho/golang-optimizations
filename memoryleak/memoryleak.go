@@ -26,12 +26,12 @@ func fnFix1(s1 string) {
 }
 
 func fnFix2(s1 string) {
-	str0 = strings.Repeat(s1[:50], 1)
-}
-
-func fnFix3(s1 string) {
 	var b strings.Builder
 	b.Grow(50)
 	b.WriteString(s1[:50])
 	str0 = b.String()
+}
+
+func fnFix3(s1 string) {
+	str0 = strings.Repeat(s1[:50], 1)
 }
