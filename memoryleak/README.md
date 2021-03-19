@@ -6,11 +6,11 @@ This [post blog](https://medium.com/dm03514-tech-blog/sre-debugging-simple-memor
 
 **Table of Contents**
 
-- [Garbage Collection](#garbage-collection)
+- [Garbage Collector](#garbage-collector)
 - [Scenarios](#scenarios)
   - [Caused by Substrings](#caused-by-substrings)
 
-## Garbage Collection
+## Garbage Collector
 
 Generally, when programming in a language that supports automatic garbage collection, we do not have to worry about memory leaking problems, as regular cleaning of unused memory will be performed. However, we must keep in mind some special scenarios that can cause a memory leak. Next, we'll look at some scenarios.
 
