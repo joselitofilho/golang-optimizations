@@ -72,8 +72,42 @@ The disadvantage of the above way is it is a little verbose.
 
 
 Finally, we can use the [`strings.Repeat`](https://golang.org/pkg/strings/#Repeat). Since the Go 1.12, we can call the `strings.Repeat` function with the count argument as 1 in the strings standard package to clone a string, and the implementaion of `strings.Repeat` will make use of `strings.Builder`, to avoid one unnecessary duplicate.
+
 ```Go
 func fnFix3(str1 string) {
 	str0 = strings.Repeat(str1[:50], 1)
+}
+```
+
+### Caused by Subslices
+_see the code [here](causedbysubslices.go)_
+
+Similarly to substrings, subslices may also cause memory leaking.
+
+```Go
+var data0 []byte
+
+func CausedBySubstring() {
+	data := allocMemory(1 << 20) // 1MB
+	gn(str)
+}
+
+func allocMemory(size int) []byte {
+	return make([]byte, size)
+}
+
+func gn(data1 []byte) {
+	str0 = str1[:50]
+}
+```
+
+In the above code, after the `gn` function is called, most memory occupied by the memory block hosting the elements of `data1` will be lost.
+
+
+To avoid this memory leaking, we must duplicate the 50 elements for `data0`, so that the aliveness of `data0` will not prevent the memory block hosting the elements of `data1` from being collected by the garbage collector.
+
+```Go
+func gnFix1(data1 []byte) {
+	data0 = append([]byte(nil), data1[len(data1)-50:]...)
 }
 ```
