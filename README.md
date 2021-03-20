@@ -21,7 +21,7 @@ Enjoy!
 
 ## Prerequisites
 
-- Go 1.15.2+
+- Go 1.15.8
 - Git
 - Docker 19.x
 
