@@ -9,6 +9,7 @@ This [post blog](https://medium.com/dm03514-tech-blog/sre-debugging-simple-memor
 - [Garbage Collector](#garbage-collector)
 - [Scenarios](#scenarios)
   - [Caused by Substrings](#caused-by-substrings)
+  - [Caused by Subslices](#caused-by-Subslices)
 
 ## Garbage Collector
 
@@ -18,7 +19,7 @@ To understand about memory management in Go and the garbage collector see [here]
 
 ## Scenarios
 
-### Caused by substrings
+### Caused by Substrings
 _see the code [here](causedbysubstring.go)_
 
 The Go standard compiler/runtime allows a `s` string and an `s` substring to share the same underlying memory block. This is very good for saving memory and processing. But it can sometimes cause a memory leak.
@@ -79,7 +80,7 @@ func fnFix3(str1 string) {
 }
 ```
 
-### Caused by subslices
+### Caused by Subslices
 _see the code [here](causedbysubslices.go)_
 
 Similarly to substrings, subslices may also cause memory leaking.
