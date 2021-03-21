@@ -81,7 +81,7 @@ func fnFix3(str1 string) {
 ```
 
 ### Caused by Subslices
-_see the code [here](causedbysubslices.go)_
+_see code [here](causedbysubslices.go)_
 
 Similarly to substrings, subslices may also cause memory leaking.
 
