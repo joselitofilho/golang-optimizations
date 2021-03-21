@@ -10,6 +10,7 @@ This [post blog](https://medium.com/dm03514-tech-blog/sre-debugging-simple-memor
 - [Scenarios](#scenarios)
   - [Caused by Substrings](#caused-by-substrings)
   - [Caused by Subslices](#caused-by-Subslices)
+  - [Caused by Interior Pointer](#caused-by-interior-pointer)
 
 ## Garbage Collector
 
@@ -20,7 +21,7 @@ To understand about memory management in Go and the garbage collector see [here]
 ## Scenarios
 
 ### Caused by Substrings
-_see the code [here](causedbysubstring.go)_
+_see code [here](caused_by_substring.go)_
 
 The Go standard compiler/runtime allows a `s` string and an `s` substring to share the same underlying memory block. This is very good for saving memory and processing. But it can sometimes cause a memory leak.
 
@@ -81,7 +82,7 @@ func fnFix3(str1 string) {
 ```
 
 ### Caused by Subslices
-_see code [here](causedbysubslices.go)_
+_see code [here](caused_by_subslices.go)_
 
 Similarly to substrings, subslices may also cause memory leaking.
 
@@ -110,5 +111,29 @@ To avoid this memory leaking, we must duplicate the 50 elements for `data0`, so 
 ```Go
 func gnFix1(data1 []byte) {
 	data0 = append([]byte(nil), data1[len(data1)-50:]...)
+}
+```
+
+### Caused by Interior Pointer
+_see code [here](caused_by_interior_pointer.go)_
+
+After the `hn` function is called, the memory block allocated for the `myStruct` will cause memory leaking.
+
+```Go
+func hn() {
+	ms := myStruct{number: 1}
+	pointer = &ms.number
+}
+```
+
+As long as `pointer` is still alive, it will retain `myStruct` in memory. This happens because an interior pointer to a structure's field keeps the whole struct in memory.
+
+
+To avoid this memory leaking, we must make a copy of `myStruct.number`.
+
+```Go
+func hnFix() {
+	ms := myStruct{number: 1}
+	number0 = ms.number
 }
 ```
