@@ -11,6 +11,7 @@ This [post blog](https://medium.com/dm03514-tech-blog/sre-debugging-simple-memor
   - [Caused by Substrings](#caused-by-substrings)
   - [Caused by Subslices](#caused-by-Subslices)
   - [Caused by Interior Pointer](#caused-by-interior-pointer)
+  - [Caused by Using Finalizers Improperly](#caused-by-using-finalizers-improperly)
 
 ## Garbage Collector
 
@@ -137,3 +138,53 @@ func hnFix() {
 	number0 = ms.number
 }
 ```
+
+### Caused by Using Finalizers Improperly
+_see code [here](caused_by_finalizers.go)_
+
+<p align="center">
+<img src="media/go-finalizer.png" />
+<i>Illustration created for “A Journey With Go”, made from the original Go Gopher, created by Renee French.</i>
+</p>
+
+Go runtime provides a method [runtime.SetFinalizer](https://golang.org/pkg/runtime/#SetFinalizer) that allows to provider a function to a variable that will be called when the garbage collector sees this variable as garbage ready to be collected since it became unreachable.
+
+After the `usingfinalizerImproperly` function is called, `x` and `y` forms a cyclic reference group. Preventing all memory blocks to the group from being collected.
+
+```Go
+func usingfinalizerImproperly() {
+	type T struct {
+		data [1 << 20]int // 1MB
+		t    *T
+	}
+
+	var finalizer = func(t *T) {
+		fmt.Println("finalizer called")
+	}
+
+	var x, y T
+
+	runtime.SetFinalizer(&x, finalizer)
+
+	x.t, y.t = &y, &x
+}
+```
+
+So, we must avoid setting finalizers for values in a cyclic reference group.
+
+```Go
+func notUsefinalizer() {
+	type T struct {
+		data [1 << 20]int // 1MB
+		t    *T
+	}
+
+	var x, y T
+
+	x.t, y.t = &y, &x
+}
+```
+
+By the way, I don't recommend using finalizers as object destructors.
+
+See [here](https://play.golang.org/p/jWhRSPNvxJ) an example using finalizer.
