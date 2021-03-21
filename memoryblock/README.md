@@ -33,7 +33,7 @@ type slice struct {
 }
 ```
 
-When you create a new slice, Go runtime will create three-blocks' object in memory with the `array` set to `nil` and `len` and `cap` set to `0`.
+When you create a new slice, Go runtime will create a three-block object in memory with the `array` set to `nil` and `len` and `cap` set to `0`.
 
 ```Go
 var slice = make([]byte, 3)
