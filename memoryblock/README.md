@@ -13,17 +13,17 @@ var arr [3]byte{1, 2, 3}
 var arr [...]byte{1, 2, 3}
 ```
 
-<img src="media/array.png" width=200>
+<p align="center"><img src="media/array.png" width=200></p>
 
 ### Slice
 
-Slices are similar to arrays, and the declaration is really similar:
+Slices are similar to arrays, even their declaration is really similar:
 
 ```Go
 var slice []byte
 ```
 
-But Go's slices ([src/runtime/slice.go](https://golang.org/src/runtime/slice.go#L11)) are structures with three fields - pointer to array, length and capacity:
+However, slices are defined in Go as a structure with three fields - pointer to array, length and capacity:
 
 ```Go
 type slice struct {
@@ -33,16 +33,20 @@ type slice struct {
 }
 ```
 
-When you create a new slice, Go runtime will create a three-block object in memory with the `array` set to `nil` and `len` and `cap` set to `0`.
+Click here ([src/runtime/slice.go](https://golang.org/src/runtime/slice.go#L11)) to see the source code of the Go's slices.
+
+When you create a new slice, Go runtime will create a three-block object in memory with the `array` set to `nil`, and with `len` and `cap` fields equal to `0`.
 
 ```Go
 var slice = make([]byte, 3)
 var slice = []byte{1, 2, 3}
 ```
 
-<img src="media/slice.png" width=350>
+<p align="center"><img src="media/slice.png" width=350></p>
 
-That was easy. But what will happen, if you create another subslice and change some elements? Let's try:
+What will happen, if you create a subslice and change some elements? 
+
+Let's look at the code below and see what happens:
 
 ```Go
 slice := []byte{1, 2, 3}
@@ -59,10 +63,11 @@ subslice: [1 4]
    slice: [1 4 3]
 ```
 
-[https://play.golang.org/p/HC43cpEKtF5](https://play.golang.org/p/HC43cpEKtF5)
+Click [here](https://play.golang.org/p/HC43cpEKtF5) to run the code above.
 
-![subslice](media/subslice.gif)
+<p align="center"><img src="media/subslice.gif" /></p>
 
+Notice that the second element of the slice has been changed to the value 4 (four). But, we add this value to the subslice.
 
 Similar result is with the following code:
 
@@ -85,11 +90,11 @@ slice: [1 2 5]
 slice: [1 2 5]
 ```
 
-[https://play.golang.org/p/GShOrk-8Pza](https://play.golang.org/p/GShOrk-8Pza)
+Click [here](https://play.golang.org/p/GShOrk-8Pza) to run the code above.
 
-Again, both the `sliceA` and `sliceB` are reusing the same underlying array.
+Again, both `sliceA` and `sliceB` are reusing the same underlying array.
 
-To avoid or prevent this surprise, never keep both the slice and its subslice around. That is, always do something either like `slice = slice[1:]` or make a copy.
+To prevent this surprise, always make a copy or something like `slice = slice[1:]`. Thus maintaining the slice and its subslice in different memory blocks.
 
 
-The standard Go compiler/runtime does let them share the same underlying memory block. This is a good design, which is both memory and CPU consuming wise. But it may cause [memory leaking](/memoryleak/README.md) sometimes.
+The standard Go compiler/runtime does let them share the same underlying memory block. This is a good design to consume memory and CPU efficiently. However, used improperly causes [memory leaking](/memoryleak/README.md).
