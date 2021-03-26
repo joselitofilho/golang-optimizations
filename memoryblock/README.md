@@ -69,7 +69,7 @@ Click [here](https://play.golang.org/p/HC43cpEKtF5) to run the code above.
 
 Notice that the second element of the slice has been changed to the value 4 (four). But, we add this value to the subslice.
 
-Similar result is with the following code:
+We have a similar result is with the following code:
 
 ```Go
 slice := []byte{1, 2, 3}
