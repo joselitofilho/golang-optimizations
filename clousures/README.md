@@ -4,10 +4,6 @@
 
 _Definition by Wikipedia_
 
-> Uma closure ocorre normalmente quando uma função é declarada dentro do corpo de outra, e a função interior referencia variáveis locais da função exterior. Em tempo de execução, quando a função exterior é executada, então uma closure é formada, que consiste do código da função interior e referências para quaisquer variáveis no escopo da função exterior que a closure necessita.
-
-_Definição da Wikipédia_
-
 To see more about Go's Closures click [here](https://tour.golang.org/moretypes/25).
 
 When working with clousures in Go, we can make some mistakes that are easy to make and difficult do debug. I will show you some examples and explain how to avoid them.
