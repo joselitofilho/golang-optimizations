@@ -6,9 +6,9 @@ _see code [here](underlying_memory_block.go)_
 Arrays are just continuous blocks of memory. We can simply represent array as a set of blocks in memory sitting next to each other.
 
 ```Go
-var arr [3]
-var arr [3]byte{1, 2, 3}
-var arr [...]byte{1, 2, 3}
+var arr [3]byte
+var arr = [3]byte{1, 2, 3}
+var arr = [...]byte{1, 2, 3}
 ```
 
 <p align="center"><img src="media/array.png" width=200></p>
