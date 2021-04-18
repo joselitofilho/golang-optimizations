@@ -4,7 +4,7 @@
 
 - [Overview](#overview)
   - [Clousures](clousures/README.md)
-  - [Underlying Memory Block](memoryblock/README.md)
+  - [Arrays and Slices](memoryblock/README.md)
   - [Memory Leaking](memoryleak/README.md)
 - [Prerequisites](#prerequisites)
 - [Setup](#setup)
@@ -16,8 +16,9 @@
 Building systems with high performance, very low response times, supporting the heavy load on little hardware has never been easier. It is necessary to a little bit more about the language, some concepts, and optimize our own code to extract more performance.
 
 I separated some concepts for us to analyze and study together.
+- [Pointers](pointers/README.md)
+- [Arrays and Slices](memoryblock/README.md)
 - [Clousures](clousures/README.md)
-- [Underlying Memory Block](memoryblock/README.md)
 - [Memory Leaking](memoryleak/README.md)
 - ...
 
@@ -61,6 +62,11 @@ go test -memprofile="mem.prof" -benchtime=1000x -bench .
 Seeing profile on text mode:
 ```bash
 go tool pprof -text mem.prof
+```
+
+Saving inuse_space profile on png:
+```bash
+go tool pprof -sample_index=inuse_space -png mem.prof
 ```
 
 Seeing profile on graph mode:

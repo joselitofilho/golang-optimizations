@@ -1,9 +1,7 @@
-# Underlying Memory Block
+# Arrays and Slices
 _see code [here](underlying_memory_block.go)_
 
-## Arrays and Slices
-
-### Array
+## Array
 
 Arrays are just continuous blocks of memory. We can simply represent array as a set of blocks in memory sitting next to each other.
 
@@ -15,7 +13,7 @@ var arr [...]byte{1, 2, 3}
 
 <p align="center"><img src="media/array.png" width=200></p>
 
-### Slice
+## Slice
 
 Slices are similar to arrays, even their declaration is really similar:
 
