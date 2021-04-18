@@ -19,6 +19,7 @@ Slices are similar to arrays, even their declaration is really similar:
 
 ```Go
 var slice []byte
+var slice = []byte{1, 2, 3}
 ```
 
 However, slices are defined in Go as a structure with three fields - pointer to array, length and capacity:
